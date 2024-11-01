@@ -1,0 +1,106 @@
+<!-- Customer Review form to enter customers review -->
+
+<br />
+<br />
+
+<link
+  href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+  rel="stylesheet"
+/>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-9">
+      <h4>
+        <b>Write a Review for Movie {{ parentData }}</b>
+      </h4>
+      <br /><br />
+
+      <div id="main">
+        <form class="form-row" id="classify-new">
+          <div class="form-group input-group-sm col-12">
+            <fieldset class="rating">
+              <input
+                type="radio"
+                id="star5"
+                name="rating"
+                value="{{ five }}"
+                [(ngModel)]="model.rating"
+              /><label
+                class="full"
+                for="star5"
+                title="Awesome - 5 stars"
+              ></label>
+
+              <input
+                type="radio"
+                id="star4"
+                name="rating"
+                value="{{ four }}"
+                [(ngModel)]="model.rating"
+              /><label
+                class="full"
+                for="star4"
+                title="Pretty good - 4 stars"
+              ></label>
+
+              <input
+                type="radio"
+                id="star3"
+                name="rating"
+                value="{{ three }}"
+                [(ngModel)]="model.rating"
+              /><label class="full" for="star3" title="Meh - 3 stars"></label>
+
+              <input
+                type="radio"
+                id="star2"
+                name="rating"
+                value="{{ two }}"
+                [(ngModel)]="model.rating"
+              /><label
+                class="full"
+                for="star2"
+                title="Kinda bad - 2 stars"
+              ></label>
+
+              <input
+                type="radio"
+                id="star1"
+                name="rating"
+                value="{{ one }}"
+                [(ngModel)]="model.rating"
+              /><label
+                class="full"
+                for="star1"
+                title="Sucks big time - 1 star"
+              ></label>
+            </fieldset>
+          </div>
+          <div class="form-group input-group-sm col-12">
+            <label for="negotiate-comments">Comments :</label>
+            <textarea
+              id="classify-new-text-input"
+              class="form-control"
+              rows="2"
+              name="desc"
+              [(ngModel)]="model.desc"
+            ></textarea>
+          </div>
+
+          <div class="form-group col-auto ml-auto">
+            <button
+              [disabled]="!model.rating || !model.desc"
+              id="classify-new-text"
+              type="submit"
+              class="btn btn-primary"
+              (click)="predict()"
+            >
+              Add Review
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<footer class="section bg-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div *ngIf="cookievalue">
+          <div *ngIf="userContent">
+            <h6 class="footer-heading text-uppercase text-white">features</h6>
+            <ul class="list-unstyled footer-link mt-4">
+              <div>
+                <li><a [routerLink]="['/feedback']"> feedback </a></li>
+              </div>
+
+              <br /><br />
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="">
+          <h6 class="footer-heading text-uppercase text-white">Contact Us</h6>
+          <p class="contact-info mt-4">
+            Contact us if you need help with anything
+          </p>
+          <p class="contact-info">+216 55-560605</p>
+          <div class="mt-5">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="https://www.facebook.com/" target="_blank"
+                  ><i class="fa fa-facebook"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://twitter.com/" target="_blank"
+                  ><i class="fa fa-twitter"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.google.com/" target="_blank"
+                  ><i class="fa fa-google"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.instagram.com/" target="_blank"
+                  ><i class="fa fa-instagram"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://in.pinterest.com/" target="_blank"
+                  ><i class="fa fa-pinterest"></i
+                ></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.youtube.com/" target="_blank"
+                  ><i class="fa fa-youtube"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

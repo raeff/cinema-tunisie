@@ -1,0 +1,68 @@
+<div *ngIf="adminMod">
+  <br /><br /><br /><br />
+
+  <div class="container">
+    <!--Signup form group declaration-->
+    <div style="width: 400px; margin: auto">
+      <form [formGroup]="showtimeForm">
+        <div class="submit-form">
+          <div class="col-md-12">
+            <label for="theatreName"> Movie Name </label>
+            <p>{{ movie.movieName }}</p>
+
+            <div class="form-group">
+              <label for="showtime"> showtime</label>
+              <input
+                type="text"
+                id="showtime"
+                [(ngModel)]="showtimeForm.showtime"
+                class="form-control"
+                formControlName="showTime"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="movieReleaseDate"> Date</label>
+              <input
+                type="date"
+                id="date"
+                [(ngModel)]="showtimeForm.date"
+                formControlName="date"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <button class="btn btn-success" (click)="updateShowtime()">
+                Update showtime
+              </button>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container">
+    <div style="width: 400px; margin: auto">
+      <div class="alert alert-warning" *ngIf="submitted && isLoginFailed">
+        submit failed!<br />
+        movie attributes not complited
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <br />
+  <br />
+</div>
+
+<div *ngIf="!adminMod">
+  <app-page-not-found> </app-page-not-found>
+</div>

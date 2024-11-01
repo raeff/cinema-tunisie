@@ -1,0 +1,40 @@
+<div *ngIf="admin">
+  <br />
+
+  <div class="container">
+    <div style="width: 400px; margin: auto">
+      <div class="submit-form">
+        <div class="col-md-12">
+          <h3></h3>
+        </div>
+        <br /><br /><br />
+        <form (ngSubmit)="onSubmit()">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="name">{{ user.username }} role</label>
+
+              <div *ngFor="let l of list">
+                <input
+                  id="role"
+                  name="role"
+                  [checked]="user.role === l"
+                  type="radio"
+                  (change)="onSelectionChange(l)"
+                  required
+                />
+                {{ l }}
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success">Update</button>
+        </form>
+      </div>
+    </div>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  </div>
+
+  <div *ngIf="!admin">
+    <app-page-not-found> </app-page-not-found>
+  </div>
+</div>

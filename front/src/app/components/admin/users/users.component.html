@@ -1,0 +1,64 @@
+<div *ngIf="adminContent">
+  <div class="container">
+    <br /><br /><br />
+    <!--
+    <input type="text" [(ngModel)]="searchText" class="searchTextBox" placeholder="Search By  UserName...">
+    list is the array of movies and filter is used to search by movie name 
+    <br><br><br>-->
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2>users List</h2>
+      </div>
+    </div>
+    <div class="panel-body">
+      <input
+        type="text"
+        class="form-control"
+        name="searchString"
+        placeholder="Type to search..."
+        [(ngModel)]="searchString"
+      />
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Username</th>
+            <th>Email</th>
+
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let l of listUsers | filter: searchString">
+            <td>{{ l.firstname }}</td>
+            <td>{{ l.lastname }}</td>
+
+            <td>{{ l.username }}</td>
+            <td>{{ l.email }}</td>
+
+            <td>
+              <button
+                (click)="userClick(l._id)"
+                class="btn btn-info"
+                style="margin-left: 10px"
+              >
+                Update
+              </button>
+              <button (click)="userOrderClick(l._id)" class="btn btn-success">
+                get Orders
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <br /><br /><br /><br />
+</div>
+
+<div *ngIf="!adminContent">
+  <app-page-not-found> </app-page-not-found>
+</div>

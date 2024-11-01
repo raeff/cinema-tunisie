@@ -1,0 +1,150 @@
+<div *ngIf="loading">
+  <app-loading-spinner></app-loading-spinner>
+  <br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <br />
+</div>
+
+<div *ngIf="!loading">
+  <br />
+  <br />
+
+  <div class="container text-center">
+    <div class="col-sm-12">
+      <div class="mask">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-black px-4">
+            <h1>Now in the cinemas</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center">
+    <div class="col-sm-12">
+      <div class="mask" style="background-color: rgba(0, 0, 0, 0.7)">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div>
+            <br />
+            <br />
+
+            <br />
+            <div class="text-white px-4">
+              <h3>
+                <a
+                  (click)="getTheaterdetails(theaterId)"
+                  style="cursor: pointer"
+                  clickable
+                  ><u>{{ currentTheater }}</u>
+                </a>
+              </h3>
+            </div>
+            <br />
+            <select
+              class="browser-default custom-select"
+              (change)="onChange($event.target.value)"
+            >
+              <option *ngFor="let t of listTheater">
+                {{ t.theatreName }}
+              </option>
+            </select>
+
+            <br />
+
+            <div *ngIf="subloading">
+              <app-loading-spinner></app-loading-spinner>
+            </div>
+            <div *ngIf="!subloading">
+             
+
+              <div *ngIf="noMovie">
+                <br />
+                <br />
+
+                <div class="text-white px-4">
+                  <h3>sorry there is no movie in the cinema</h3>
+                </div>
+              </div>
+              <!-- list is the array of movies and filter is used to search by movie name -->
+              <br /><br />
+              <br />
+              <div *ngIf="!noMovie">
+                <input
+                  type="text"
+                  [(ngModel)]="searchText"
+                  class="searchTextBox"
+                  placeholder="Search By Movie Name..."
+                />
+         
+              <div *ngFor="let l of listMovies | filters: searchText">
+                <div class="col-sm-12">
+                  <div (click)="movieClick(l._id)" style="cursor: pointer">
+                    <img
+                      height="200px"
+                      width="400px"
+                      src="../../assets/Images/{{ l.movieImage }}"
+                      class="img-responsive"
+                      alt="Image"
+                    />
+
+                    <span class="movieName"
+                      ><a
+                        ><h3>{{ l.movieName }}</h3></a
+                      ></span
+                    ><br />
+                    <span class="movieName">{{ l.movieLength }} | </span>
+                    <span class="movieName">{{ l.movieType }} </span>
+                  </div>
+                  <div *ngIf="adminRedact">
+                    <button
+                      (click)="updateMovie(l._id)"
+                      class="btn btn-success"
+                    >
+                      update movie
+                    </button>
+                    |
+                    <button (click)="deleteMovie(l._id)" class="btn btn-danger">
+                      delete movie
+                    </button>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br /><br />
+  <br />
+  <br />
+</div>

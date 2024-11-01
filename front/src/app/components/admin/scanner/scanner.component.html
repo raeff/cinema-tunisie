@@ -1,0 +1,23 @@
+<div *ngIf="adminContent">
+  <zxing-scanner
+    #scanner
+    [formats]="['QR_CODE', 'EAN_13']"
+    (camerasFound)="cameraFound($event)"
+    (camerasNotFound)="camerasNotFound($event)"
+    (scanSuccess)="scanSuccessHandler($event)"
+  >
+  </zxing-scanner>
+
+  <div class="guest">
+    <ng-container *ngIf="guestExist">
+      <div (click)="close()" class="ui success message">
+        <i class="close icon"></i>
+        <div class="header">Welcome!!</div>
+        <p>QRcode has been found on the orders list</p>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div *ngIf="!adminContent">
+  <app-page-not-found> </app-page-not-found>
+</div>

@@ -1,0 +1,72 @@
+<div *ngIf="userContent">
+  <div
+    class="modal-content"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    ria-hidden="ture"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <textarea
+                (click)="textClick()"
+                name="description"
+                [formControl]="messageFormControl"
+                [(ngModel)]="post.description"
+                class="form-control"
+                id="exampleInputPassword"
+                placeholder="message"
+              >
+              </textarea>
+              <div
+                *ngIf="messageFormControl.hasError('minlength') && submitted"
+              >
+                Message must be at least 4 characters long.
+              </div>
+              <div *ngIf="messageFormControl.hasError('required') && submitted">
+                Message is <strong>required</strong>
+              </div>
+            </div>
+
+            <button
+              class="btn btn-success"
+              [disabled]="loading"
+              color="primary"
+              (click)="addFeedback()"
+            >
+              {{ buttonText }}
+            </button>
+
+            <div class="alert alert-success" *ngIf="submitSuccess">
+              feedback sent successfully <br />
+            </div>
+          </form>
+        </div>
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!userContent">
+  <app-page-not-found> </app-page-not-found>
+</div>

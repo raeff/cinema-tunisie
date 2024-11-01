@@ -1,0 +1,452 @@
+<div *ngIf="pUrl">
+    <script type="textr/javascript" src="jspdf.min.js"></script>
+<script type="text/javascript" src="html2canvas.js"></script>
+<script type="text/javascript"></script>
+<div *ngIf="!isDownloadEnabled">
+<div class="mainc">
+   
+    <div class="mainc_b">
+
+        <div class="container-fluid py-3 bg-dark card ">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div id="pay-invoice" class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h4 class="text-center">Pay Invoice</h4>
+                            </div>
+
+                            <form action="/echo" method="post" novalidate="novalidate" class="needs-validation"
+                            name="paymentForm" [formGroup]="paymentForm" #regForm='ngForm' (ngSubmit)="onClickPlaceOrder()">
+                                <div class="form-group text-center">
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item"><i class="text-muted fa fa-cc-visa fa-2x"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-cc-mastercard fa-2x"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-cc-amex fa-2x"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-cc-discover fa-2x"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cc-payment" class="control-label mb-1">Payment amount</label>
+                                    <input id="cc-payment" name="cc-payment" type="text" class="form-control"
+                                        aria-required="true" aria-invalid="false" required value="{{totalamt}}.00 TND" [disabled]="true" > 
+                                    <span class="invalid-feedback">Enter the payment amount</span>
+                                </div>
+                                <div class="form-group has-success">
+                                    <label for="cc-name" class="control-label mb-1">Name on card</label>
+                                     <!-- customer name  has to be grater than three characters, only alphabetic characters are 
+                                    allowed -->
+                                    <input formControlName="username" id="username" type="text"
+                                        class="form-control " minlength="3" maxlength=30 pattern="^[a-zA-Z\s]+$"
+                                        required 
+                                        [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                                        <div *ngIf="submitted && f.username.errors" >
+
+                                        <div *ngIf="f.username.errors.pattern" class="error">  must be alphabetic  </div>
+                                        <div *ngIf=" f.username.errors.required" class="error"> cardname is required</div>
+                                        <div *ngIf="f.username.hasError('minlength') "  class="error">has to be minimum length 3  </div>
+                                        </div>
+                                   
+                              
+                                </div>
+                                <div class="form-group">
+                                    <label for="cc-number" class="control-label mb-1">Card number</label>
+                                    <div class="controls">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                 <!-- first set of card number  is required, has to be minimum length 4 and 
+                                                must be numeric -->
+                                                <input formControlName="cardnum1" type="text" class="form-control" minlength="4" maxlength="4"
+                                                    pattern="[0-9]*" title="First four digits" required
+                                                    [ngClass]="{ 'is-invalid': submitted && f.cardnum1.errors }">
+                                                    <div *ngIf="submitted && f.cardnum1.errors" >
+
+                                                    <div *ngIf="f.cardnum1.errors.pattern" class="error">  must be numeric  </div>
+                                                    <div *ngIf="f.cardnum1.hasError('minlength') "  class="error">has to be minimum length 4  </div>
+
+                                                    <div *ngIf="f.cardnum1.errors.required" class="error"> first set of card number  is required</div>
+                                                    </div>
+                                          
+
+                                            </div>
+                                            <div class="col-md-3">
+                                             <input formControlName="cardnum2" type="text" class="form-control" minlength="4" maxlength="4"
+                                                    pattern="[0-9]*" title="Second four digits" required  
+                                                    [ngClass]="{ 'is-invalid': submitted && f.cardnum2.errors }">
+                                                <!-- second set of card number  is required, has to be minimum length 4 and 
+                                                must be numeric -->
+                                                <div *ngIf="submitted && f.cardnum2.errors" >
+
+                                                    <div *ngIf="f.cardnum2.errors.pattern" class="error">  must be numeric  </div>
+                                                    <div *ngIf="f.cardnum2.hasError('minlength') "  class="error">has to be minimum length 4  </div>
+
+                                                    <div *ngIf="f.cardnum2.errors.required" class="error"> second set of card number  is required</div>
+</div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input formControlName="cardnum3" type="text" class="form-control" minlength="4" maxlength="4"
+                                                    pattern="[0-9]*" title="Third four digits" required 
+                                                    [ngClass]="{ 'is-invalid': submitted && f.cardnum3.errors }">
+                                                <!-- third set of card number  is required, has to be minimum length 4 and 
+                                                must be numeric -->
+                                                <div *ngIf="submitted && f.cardnum3.errors" >
+
+                                                    <div *ngIf="f.cardnum3.errors.pattern" class="error">  must be numeric  </div>
+                                                    <div *ngIf="f.cardnum3.hasError('minlength') "  class="error">has to be minimum length 4  </div>
+
+                                                    <div *ngIf="f.cardnum3.errors.required" class="error"> third set of card number  is required</div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <!-- last set of card number  is required, has to be minimum length 4 and 
+                                                must be numeric -->
+
+                                                <input formControlName="cardnum4" type="text" class="form-control" minlength="4" maxlength="4"
+                                                    pattern="[0-9]*" title="Second four digits" required
+                                                    [ngClass]="{ 'is-invalid': submitted && f.cardnum4.errors }">
+                                                    <div *ngIf="submitted && f.cardnum4.errors" >
+                                                        <div *ngIf="f.cardnum4.errors.pattern" class="error">  must be numeric  </div>
+                                                        <div *ngIf="f.cardnum4.hasError('minlength') "  class="error">has to be minimum length 4  </div>
+    
+                                                        <div *ngIf="f.cardnum4.errors.required" class="error"> fourth set of card number  is required</div>
+                                                        
+                                            </div>
+                                            
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+
+
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="cc-exp" class="control-label mb-1">Expiration</label>
+
+
+
+                                            <select class="form-control" name="cc_exp_mo">
+                                                <option value="01">January</option>
+                                                <option value="02">February</option>
+                                                <option value="03">March</option>
+                                                <option value="04">April</option>
+                                                <option value="05">May</option>
+                                                <option value="06">June</option>
+                                                <option value="07">July</option>
+                                                <option value="08">August</option>
+                                                <option value="09">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                            <span class="invalid-feedback">Enter the expiration date</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="cc-exp" class="control-label mb-1">Expiration</label>
+                                            <select class="form-control" name="cc_exp_yr">
+                    
+                                                <option>2022</option>
+                                                <option>2023</option>
+                                                <option>2024</option>
+                                                <option>2025</option>
+                                                <option>2026</option>
+                                                <option>2027</option>
+                                                <option>2028</option>
+                                                <option>2029</option>
+                                                <option>2030</option>
+                                            </select>
+                                            <span class="invalid-feedback">Enter the expiration date</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-4">
+                                        <label for="x_card_code" class="control-label mb-1">Security code</label>
+                                        <div class="input-group">
+                                             <!-- security code is required, has to be minimum length 3 and 
+                                                must be numeric -->
+                                            <input formControlName="cvvcode" type="text" class="form-control" minlength="3" maxlength="3"
+                                                pattern="[0-9]*" title="CVV" required
+                                                
+                                                [ngClass]="{ 'is-invalid': submitted && f.cvvcode.errors }">
+                                                <div *ngIf="submitted && f.cvvcode.errors" >
+
+                                                    <div *ngIf="f.cvvcode.errors.pattern" class="error">  must be numeric  </div>
+                                                    <div *ngIf="f.cvvcode.hasError('minlength') "  class="error">has to be minimum length 3  </div>
+
+                                                    <div *ngIf="f.cvvcode.errors.required" class="error"> cvv code is required</div>
+
+</div>
+                                            <!-- <div class="alert alert-danger" *ngIf="cvv.touched && !cvv.valid"> -->
+                                          
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="center">
+                                    <div class="centre">
+                                <button *ngIf="!payed"  id="payment-button" type="submit" class="btn btn-lg btn-primary">
+                                    <i class="fa fa-lock fa-lg"></i>&nbsp;
+                                    <span id="payment-button-amount" (click)="onClickPlaceOrder">Pay {{totalamt}}.00 TND</span>
+                                </button>
+                                </div>
+                                <div class="centre">
+                                <button class="btn btn-lg btn-success "  type="submit"  *ngIf="!payed"   >
+                               
+                                    <span  (click)="goback()">Cancel</span>
+                                </button>
+                                </div>
+                            </div>
+                            </form>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+
+
+
+
+
+
+    <!-- Order Summary Side Panel -->
+    <div class="mainc_c">
+    
+
+        
+        <div class="col-md-12 order-md-2 mb-4" id="col-md-12">
+            <br>
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Movie Booking Summary</span>
+            </h4>              
+               
+        <ul id="capture"class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">Theater Name</h6>
+                            </div> 
+                        <span class="text-muted">{{theater.theatreName}}</span>
+                    </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Movie Name</h6>
+                        </div> 
+                    <span class="text-muted">{{movie.movieName}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Movie Length</h6>
+                    </div>
+                    <span class="text-muted">{{movie.movieLength}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">Seat Details</h6>
+                        </div>
+                        <span class="text-muted">{{seatdetails}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">Seat Count</h6>
+                        </div>
+                        <span class="text-muted">{{noofseats}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">Show Time</h6>
+                         
+                        </div>
+                        <span class="text-muted">{{showtime}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">Show Date</h6>
+                         
+                        </div>
+                        <span class="text-muted">  {{showtimedate | date:'longDate'}}   </span>
+
+                    </li>
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                                <div class="text-success">
+                                    <h6 class="my-0">Internet Handling Fees</h6>
+                                  
+                                </div>
+                                <span class="text-success">+{{handlingfees }} TND</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Total Amount Payable (USD)</span>
+                                <strong>{{(noofseats * ticketprice) + handlingfees }} TND</strong>
+                            </li>
+                      
+                           
+                        </ul>
+
+                      
+                       
+                  
+             
+
+
+
+                </div>
+                <br>
+                <div class="col-md-12 order-md-2 mb-4" id="col-md-12">
+                    <div class="note">     
+                        <b>Note:</b> 
+                 You can cancel the tickets 4 hour(s) before the show. Refunds will be done according to Cancellation Policy.
+                 Privacy Policy | Contact Us
+             
+             </div>         
+            </div>
+        </div>  
+    </div>
+
+ 
+
+
+
+
+
+
+          
+                             
+                     
+                   
+
+<br>
+<br>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+</div>
+
+
+
+
+
+
+
+<div *ngIf="isDownloadEnabled">
+    <div class="mainc">
+       
+        <div class="mainc_b">  
+            <div class="col-md-6 mx-auto" >
+                <br>
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Movie Booking Summary</span>
+                </h4>              
+                   
+            <ul id="capture"class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Theater Name</h6>    
+                                </div> 
+                            <span class="text-muted">{{theater.theatreName}}</span>
+                        </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">Movie Name</h6>
+                            </div> 
+                        <span class="text-muted">{{movie.movieName}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">Movie Length</h6>
+                        </div>
+                        <span class="text-muted">{{movie.movieLength}}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Seat Details</h6>
+                            </div>
+                            <span class="text-muted">{{seatdetails}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Seat Count</h6>
+                            </div>
+                            <span class="text-muted">{{noofseats}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div>
+                                    <h6 class="my-0">Show Time</h6>
+                                 
+                                </div>
+                                <span class="text-muted">{{showtime}}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div>
+                                    <h6 class="my-0">Show Date</h6>
+                                 
+                                </div>
+                                <span class="text-muted">  {{showtimedate | date:'longDate'}}   </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between bg-light">
+                                    <div class="text-success">
+                                        <h6 class="my-0">Internet Handling Fees</h6>
+                                      
+                                    </div>
+                                    <span class="text-success">+{{handlingfees }} TND</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Total Amount Payable (USD)</span>
+                                    <strong>{{(noofseats * ticketprice) + handlingfees }} TND</strong>
+                                </li>
+                                <li class="list-group-item " *ngIf="modelqr">
+                                 
+                                       
+                                       
+                                          <div data-label="qr" >
+                                            <ngx-qrcode 
+                                              id="qr3"
+                                              [elementType]="elementType"
+                                              [value]="modelqr.qr"
+                                              class="qrcode"
+                                              [width]="128"
+                                            ></ngx-qrcode>
+                                          </div>
+                                          <p>scan this code to enter</p>
+                                      
+                                   
+                                  </li>
+                               
+                            </ul>
+    
+                          
+                           
+                      
+                 
+                        <button   class="downloadPDF" (click)="downloadAsPDF()">Download M Ticket</button>
+    
+                        <br>
+                        <div class="note">     
+                            <b>Note:</b> 
+                     You can cancel the tickets 4 hour(s) before the show. Refunds will be done according to Cancellation Policy.
+                     Privacy Policy | Contact Us
+                 
+                 </div> 
+                    </div>
+                   
+              
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!pUrl">
+<app-page-not-found>
+</app-page-not-found>
+
+</div>

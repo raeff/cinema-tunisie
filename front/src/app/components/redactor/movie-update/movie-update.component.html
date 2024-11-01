@@ -1,0 +1,185 @@
+<div *ngIf="adminRedact">
+  <br />
+  <br />
+  <div class="container">
+    <!--Signup form group declaration-->
+    <div style="width: 400px; margin: auto">
+      <form [formGroup]="movieForm">
+        <div class="submit-form">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="movieName">Name</label>
+              <input
+                type="text"
+                id="movieName"
+                [(ngModel)]="movieForm.movieName"
+                class="form-control"
+                formControlName="movieName"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="movieImage"> Image</label>
+
+              <div style="text-align: center">
+                <form>
+                  <div>
+                    <input
+                      type="file"
+                      name="image"
+                      (change)="selectImage($event)"
+                      [(ngModel)]="movieForm.movieImage"
+                    />
+                  </div>
+                  <br />
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="movieURL"> URL</label>
+              <input
+                type="text"
+                id="movieURL"
+                [(ngModel)]="movieForm.movieURL"
+                class="form-control"
+                formControlName="movieURL"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="movieReleaseDate">Release Date</label>
+              <input
+                type="text"
+                id="movieReleaseDate"
+                [(ngModel)]="movieForm.movieReleaseDate"
+                class="form-control"
+                formControlName="movieReleaseDate"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="movieLength">Length</label>
+              <input
+                type="text"
+                id="movieLength"
+                [(ngModel)]="movieForm.movieLength"
+                class="form-control"
+                formControlName="movieLength"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="directorName">director Name</label>
+              <input
+                type="text"
+                id="directorName"
+                [(ngModel)]="movieForm.directorName"
+                class="form-control"
+                formControlName="directorName"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="language">language</label>
+              <input
+                type="text"
+                id="language"
+                [(ngModel)]="movieForm.language"
+                class="form-control"
+                formControlName="language"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="movieType">Type</label>
+              <input
+                type="text"
+                id="movieType"
+                [(ngModel)]="movieForm.movieType"
+                class="form-control"
+                formControlName="movieType"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="synopsis">Synopsis</label>
+              <textarea
+                type="text"
+                id="synopsis"
+                [(ngModel)]="movieForm.synopsis"
+                class="form-control"
+                formControlName="synopsis"
+                required
+              >
+              </textarea>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="rating">rating</label>
+              <input
+                type="text"
+                id="rating"
+                [(ngModel)]="movieForm.rating"
+                class="form-control"
+                formControlName="rating"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <button class="btn btn-success" (click)="updateMovie()">
+                Update Movie
+              </button>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container">
+    <div style="width: 400px; margin: auto">
+      <div class="alert alert-warning" *ngIf="submitted && isLoginFailed">
+        submit failed!<br />
+        movie attributes not complited
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+</div>
+
+<div *ngIf="!adminRedact">
+  <app-page-not-found> </app-page-not-found>
+</div>
+
+<br />
+<br />

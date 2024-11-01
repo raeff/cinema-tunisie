@@ -1,0 +1,71 @@
+<div *ngIf="admin">
+  <br />
+  <br />
+
+  <div class="container text-center">
+    <div class="col-sm-12">
+      <div class="mask" style="background-color: rgba(0, 0, 0, 0.7)">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div>
+            <br />
+            <br />
+            <div *ngIf="adminRedact">
+              <div class="col-sm-12">
+                <button (click)="addMovie()" class="btn btn-success">
+                  add new movie
+                </button>
+              </div>
+            </div>
+
+            <br />
+            <input
+              type="text"
+              [(ngModel)]="searchText"
+              class="searchTextBox"
+              placeholder="Search By Movie Name..."
+            />
+            <!-- list is the array of movies and filter is used to search by movie name -->
+            <br /><br /><br />
+            <div *ngFor="let l of list | filter: searchText">
+              <div class="col-sm-12">
+                <div (click)="movieClick(l._id)" style="cursor: pointer">
+                  <img
+                    height="200px"
+                    width="400px"
+                    src="../../../../assets/Images/{{ l.movieImage }}"
+                    class="img-responsive"
+                    alt="Image"
+                  />
+
+                  <span class="movieName"
+                    ><a
+                      ><h3>{{ l.movieName }}</h3></a
+                    ></span
+                  ><br />
+                  <span class="movieName">{{ l.movieLength }} | </span>
+                  <span class="movieName">{{ l.movieType }} </span>
+                </div>
+                <div *ngIf="adminRedact">
+                  <button (click)="updateMovie(l._id)" class="btn btn-success">
+                    update movie
+                  </button>
+                  |
+                  <button (click)="deleteMovie(l._id)" class="btn btn-danger">
+                    delete movie
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br /><br />
+  <br />
+  <br />
+</div>
+
+<div *ngIf="!admin">
+  <app-page-not-found> </app-page-not-found>
+</div>

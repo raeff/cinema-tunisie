@@ -1,0 +1,78 @@
+<div *ngIf="adminMod">
+  <br />
+  <br />
+  <br />
+  <br />
+
+  <div class="container">
+    <!--Signup form group declaration-->
+    <div style="width: 400px; margin: auto">
+      <div class="submit-form">
+        <div *ngIf="!submitted">
+          <div class="col-md-12">
+            <h3>Showtime form</h3>
+          </div>
+          <br /><br /><br />
+          <div class="col-md-12">
+            <label for="theatreName"> Movie Name </label>
+            <p>{{ movie.movieName }}</p>
+
+            <div class="form-group">
+              <label for="theatreName"> Theatre Name</label>
+
+              <div *ngFor="let l of list">
+                <input
+                  name="radiogroup"
+                  [checked]="idx === 0"
+                  type="radio"
+                  (change)="onSelectionChange(l)"
+                />
+                {{ l.theatreName }}<br />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="showTime"> Showtime</label>
+              <input
+                type="text"
+                id="showTime"
+                [(ngModel)]="showtimeForm.showTime"
+                class="form-control"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="movieReleaseDate">Date</label>
+              <input
+                type="date"
+                id="date"
+                [(ngModel)]="showtimeForm.date"
+                class="form-control"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <button class="btn btn-success" (click)="addShowTime()">
+                Add Showtime
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <br />
+  <br />
+</div>
+
+<div *ngIf="!adminMod">
+  <app-page-not-found> </app-page-not-found>
+</div>

@@ -1,0 +1,67 @@
+<div *ngIf="adminContent">
+  <br />
+  <br /><br />
+
+  <div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2>users List</h2>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let l of listAdmins">
+              <td>{{ l.firstname }}</td>
+              <td>{{ l.lastname }}</td>
+              <td>{{ l.email }}</td>
+              <td>{{ l.role }}</td>
+              <td>
+                <button
+                  (click)="userClick(l._id)"
+                  class="btn btn-info"
+                  style="margin-left: 10px"
+                >
+                  Update
+                </button>
+
+                <button
+                  (click)="deleteAdmin(l._id)"
+                  class="btn btn-danger"
+                  style="margin-left: 10px"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br /><br /><br />
+  <br />
+  <br /><br /><br />
+
+  <br />
+  <br /><br /><br />
+
+  <br />
+  <br /><br /><br />
+
+  <br />
+  <br /><br /><br />
+</div>
+
+<div *ngIf="!adminContent">
+  <app-page-not-found> </app-page-not-found>
+</div>

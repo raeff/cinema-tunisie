@@ -1,0 +1,21 @@
+<div *ngIf="adminContent">
+  <div class="list-group">
+    <a
+      *ngFor="let post of list"
+      class="list-group-item list-group-item-action flex-column align-items-start"
+    >
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">
+          {{ post.userRef.username }} : ({{ post.userRef.email }})
+        </h5>
+        <p>{{ post.date | date: "medium" }}</p>
+      </div>
+      <p class="mb-1">{{ post.description }}</p>
+    </a>
+  </div>
+  <br />
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</div>
+<div *ngIf="!adminContent">
+  <app-page-not-found> </app-page-not-found>
+</div>

@@ -1,0 +1,311 @@
+<!-- Added by Dharati on04/18/2019 -->
+<div class="body">
+  <h1>Movie Seat Selection</h1>
+
+  <div class="w3ls-reg">
+    <!-- input fields -->
+
+    <div *ngIf="!step1">
+      <div class="col-md-12">
+        <h2>fill the required details below</h2>
+        <div class="mr_agilemain">
+          <div class="agileits-left">
+            <label class="mr_agilemain"> Name </label>
+            <input
+              type="text"
+              id="Username"
+              [(ngModel)]="model.name"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="mr_agilemain">
+          <div class="agileits-left">
+            <label class="mr_agilemain"> Seats Number </label>
+            <input
+              type="number"
+              id="Numseats"
+              [(ngModel)]="model.Numseats"
+              required
+              min="1"
+            />
+          </div>
+        </div>
+
+        <br />
+        <button
+          *ngIf="model.name && model.Numseats"
+          (click)="addClientSeats(model)"
+        >
+          select seats
+        </button>
+      </div>
+    </div>
+
+    <!-- seat availabilty list -->
+    <!-- seat layout -->
+    <div [hidden]="!step2">
+      <ul class="seat_w3ls">
+        <li class="smallBox greenBox">Selected/Booked Seat</li>
+
+        <!-- <li class="smallBox redBox">Reserved Seat</li> -->
+
+        <li class="smallBox emptyBox">Empty Seat</li>
+      </ul>
+      <div class="seatStructure txt-center">
+        <table id="seatsBlock">
+          <p id="notification"></p>
+          <tr>
+            <td></td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>A</td>
+            <td *ngFor="let A of listA; index as i">
+              <input
+                [disabled]="places[i]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(A)"
+                [checked]="places[i]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>B</td>
+            <td *ngFor="let B of listB; index as J">
+              <input
+                [disabled]="places[J + 12]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(B)"
+                [checked]="places[J + 12]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td *ngFor="let C of listC; index as K">
+              <input
+                [disabled]="places[K + 24]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(C)"
+                [checked]="places[K + 24]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>D</td>
+            <td *ngFor="let D of listD; index as L">
+              <input
+                [disabled]="places[L + 36]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(D)"
+                [checked]="places[L + 36]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>E</td>
+            <td *ngFor="let E of listE; index as M">
+              <input
+                [disabled]="places[M + 48]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(E)"
+                [checked]="places[M + 48]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>F</td>
+            <td *ngFor="let F of listF; index as N">
+              <input
+                [disabled]="places[N + 60]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(F)"
+                [checked]="places[N + 60]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>G</td>
+            <td *ngFor="let G of listG; index as O">
+              <input
+                [disabled]="places[O + 72]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(G)"
+                [checked]="places[O + 72]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>H</td>
+            <td *ngFor="let H of listH; index as P">
+              <input
+                [disabled]="places[P + 84]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(H)"
+                [checked]="places[P + 84]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>I</td>
+            <td *ngFor="let I of listI; index as Q">
+              <input
+                [disabled]="places[Q + 96]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(I)"
+                [checked]="places[Q + 96]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>J</td>
+            <td *ngFor="let J of listJ; index as R">
+              <input
+                [disabled]="places[R + 108]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(J)"
+                [checked]="places[R + 108]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>K</td>
+            <td *ngFor="let K of listK; index as S">
+              <input
+                [disabled]="places[S + 120]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(K)"
+                [checked]="places[S + 120]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>L</td>
+            <td *ngFor="let L of listL; index as T">
+              <input
+                [disabled]="places[T + 132]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(L)"
+                [checked]="places[T + 132]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>M</td>
+
+            <td *ngFor="let M of listM; index as U">
+              <input
+                [disabled]="places[U + 144]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(M)"
+                [checked]="places[U + 144]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>N</td>
+            <td *ngFor="let N of listN; index as V">
+              <input
+                [disabled]="places[V + 156]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(N)"
+                [checked]="places[V + 156]"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>O</td>
+            <td *ngFor="let O of listO; index as W">
+              <input
+                [disabled]="places[W + 168]"
+                type="checkbox"
+                class="seats"
+                (click)="addchk(O)"
+                [checked]="places[W + 168]"
+              />
+            </td>
+          </tr>
+        </table>
+        <div class="screen">
+          <h2 class="wthree">Screen this way</h2>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectionComplited">
+      <div class="displayerBoxes txt-center">
+        <table class="Displaytable w3ls-table" width="100%">
+          <tr>
+            <th>Name</th>
+            <th>Number of Seats</th>
+            <th>Seats</th>
+          </tr>
+          <tr>
+            <td>
+              <textarea id="nameDisplay" [(ngModel)]="model.name"></textarea>
+            </td>
+            <td>
+              <textarea
+                id="NumberDisplay"
+                [(ngModel)]="model.Numseats"
+              ></textarea>
+            </td>
+            <td>
+              <textarea id="seatsDisplay" [(ngModel)]="model.seats"></textarea>
+            </td>
+          </tr>
+        </table>
+        <br />
+        <br />
+
+        <div *ngIf="selectionComplited">
+          <button class="btn btn-space" (click)="goback()">Previous</button>
+
+          <button class="btn btn-space" (click)="confirmandpay()">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

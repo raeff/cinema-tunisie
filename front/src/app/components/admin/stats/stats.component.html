@@ -1,0 +1,108 @@
+<div *ngIf="adminContent">
+  <br />
+  <div class="container text-center">
+    <div class="col-sm-12">
+      <div class="mask">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-black px-4">
+            <h1>Orders for each cinema</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center">
+    <div class="col-sm-12">
+      <div class="mask" style="background-color: rgba(255, 255, 255)">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <ejs-chart id="chart-container" [primaryXAxis]="primaryXAxis">
+            <e-series-collection>
+              <e-series
+                [dataSource]="chartData"
+                type="Column"
+                xName="cinema"
+                yName="order"
+                name="Gold"
+              >
+              </e-series>
+            </e-series-collection>
+          </ejs-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br /><br /><br /><br />
+
+  <div class="container text-center">
+    <div class="col-sm-12">
+      <div class="mask">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-black px-4">
+            <h1>Top 5 movies by ticket sales</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container text-center">
+    <div class="col-sm-12">
+      <div class="mask" style="background-color: rgba(0, 0, 0, 0.7)">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div>
+            <br />
+            <br />
+
+            <br />
+            <br /><br /><br />
+            <div *ngFor="let l of list; index as i">
+              <div class="container text-center">
+                <div class="col-sm-12">
+                  <div class="mask">
+                    <div
+                      class="d-flex justify-content-center align-items-center h-100"
+                    >
+                      <div class="text-white px-4">
+                        <h2>{{ l.orders }} tickets</h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div (click)="movieClick(l._id)" style="cursor: pointer">
+                  <span class="releaseDate"
+                    >Release Date: {{ l.movieReleaseDate }}</span
+                  >
+                  <img
+                    height="200px"
+                    width="400px"
+                    src="../../assets/Images/{{ l.movieImage }}"
+                    class="img-responsive"
+                    alt="Image"
+                  />
+
+                  <span class="movieName"
+                    ><a>{{ l.movieName }} </a></span
+                  ><br />
+                  <span class="light-text">{{ l.movieLength }} | </span>
+                  <span class="light-text">{{ l.language }} | </span>
+                  <span class="light-text">{{ l.movieType }} | </span>
+                  <span class="light-text">{{ l.rating }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br /><br />
+  <br />
+  <br />
+</div>
+
+<div *ngIf="!adminContent">
+  <app-page-not-found> </app-page-not-found>
+</div>

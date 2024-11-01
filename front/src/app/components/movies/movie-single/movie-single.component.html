@@ -1,0 +1,236 @@
+<ng-template appPlaceholder></ng-template>
+
+<div *ngIf="loading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div *ngIf="!loading">
+  <div class="maindiv">
+    <div class="row">
+      <div class="col">
+        <div class="videomiddle">
+          <h3>
+            <span class="label label-warning"> {{ movieName }} Trailer</span>
+          </h3>
+
+          <iframe class="video" [src]="url | safe"></iframe>
+        </div>
+        <div class="card">
+          <p class="title">{{ movieName }}</p>
+          <!-- Show movie Data in card -->
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>
+                  <strong><strong>Public Rating:</strong></strong>
+                </td>
+                <td>{{ rating }}</td>
+              </tr>
+              <tr>
+                <td><strong>Length:</strong></td>
+                <td>{{ movieLength }}</td>
+              </tr>
+              <tr>
+                <td><strong>Language:</strong></td>
+                <td>{{ language }}</td>
+              </tr>
+              <tr>
+                <td><strong>Directed By:</strong></td>
+                <td>{{ directorName }}</td>
+              </tr>
+              <tr>
+                <td><strong>Release Date:</strong></td>
+                <td>{{ movieReleaseDate }}</td>
+              </tr>
+              <tr>
+                <td><strong>Category:</strong></td>
+                <td>{{ movieType }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 class="page-heading">Synopsis</h2>
+
+        <p class="movie__describe">{{ synopsis }}</p>
+        <div class="middlepart">
+          <div class="movie-date-selection">
+            <div class="date-picker">
+              <form class="form-inline">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input
+                      (dateSelect)="onSelect($event)"
+                      id="dateId"
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="dp"
+                      [(ngModel)]="dateModel"
+                      ngbDatepicker
+                      #d="ngbDatepicker"
+                      [minDate]="minDate"
+                      [maxDate]="maxDate"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary calendar"
+                        (click)="d.toggle()"
+                        type="button"
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <br />
+            <br />
+
+            <div *ngIf="adminMod">
+              <div class="col-sm-12">
+                <button (click)="addShowTime()" class="btn btn-success">
+                  add showTime
+                </button>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <!-- display Showtime -->
+            <div *ngFor="let c of result" class="main">
+              <div class="location">
+                <a
+                  type="button"
+                  (click)="getTheaterdetails(c.values[0].theatreId)"
+                >
+                  {{ c.name }}</a
+                >
+              </div>
+
+              <div class="time" *ngFor="let ca of c.values">
+                <button
+                  type="button"
+                  value="{{ ca._id }}"
+                  (click)="
+                    selectShowtime(ca._id, ca.theatreId, ca.showTime, ca.date)
+                  "
+                  class="btn1 btn-outline-danger"
+                >
+                  {{ ca.showTime }}
+                </button>
+
+                <button
+                  *ngIf="adminMod"
+                  type="button"
+                  value="{{ ca._id }}"
+                  (click)="updateShowtime(ca._id)"
+                  class="btn1 btn-primary"
+                >
+                  update
+                </button>
+                <button
+                  *ngIf="adminMod"
+                  type="button"
+                  value="{{ ca._id }}"
+                  (click)="deleteShowTime(ca._id)"
+                  class="btn1 btn-danger"
+                >
+                  remove
+                </button>
+              </div>
+            </div>
+            <div *ngIf="userContent">
+              <button
+                mat-button
+                type="button"
+                (click)="confirm()"
+                class="button btn btn-primary middle"
+              >
+                Book Tickets
+              </button>
+            </div>
+
+            <div *ngIf="!cookievalue">
+              <button
+                type="button"
+                (click)="confirm()"
+                class="btn btn-primary btn-space middle"
+              >
+                Book Tickets
+              </button>
+            </div>
+
+            <!-- list of user reviews -->
+
+            <table class="table1">
+              <tr>
+                <td>
+                  <h2>Your votes:</h2>
+                </td>
+                <td>
+                  <ngb-rating
+                    [max]="5"
+                    [(rate)]="ratemoy"
+                    [readonly]="true"
+                  ></ngb-rating>
+                </td>
+              </tr>
+            </table>
+            <table class="table2">
+              <tr>
+                <td>
+                  <h2>Total:</h2>
+                </td>
+                <td>
+                  <h3 class="total">{{ reviewsNumber }} votes</h3>
+                </td>
+              </tr>
+            </table>
+
+            <table class="content-table">
+              <thead>
+                <tr>
+                  <th>users</th>
+                  <th class="desc">Reviews</th>
+                  <th>Date</th>
+                  <th>Vote</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="reviewTable" *ngFor="let l of list">
+                  <!-- <td>{{parentData}}</td> -->
+                  <td>{{ l.userRef.username }}</td>
+                  <td>{{ l.desc }}</td>
+                  <td>{{ l.date | date: "medium" }}</td>
+                  <td>{{ l.rating }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div *ngIf="cookievalue">
+              <div *ngIf="usercontent">
+                <app-movie-review
+                  [parentData]="movieName"
+                  [movieId]="movieId"
+                  *ngIf="!posted"
+                  (add_invoked)="changevalue()"
+                >
+                </app-movie-review>
+              </div>
+            </div>
+
+            <app-movie-review
+              [parentData]="movieName"
+              [movieId]="movieId"
+              *ngIf="!cookievalue"
+              (add_invoked)="changevalue()"
+            >
+            </app-movie-review>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <!-- datepicker -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+.image {
+  position: relative;
+  text-align: center;
+  align-content: center;
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../../assets/bg3.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+.biggerText1 {
+  font-size: 20vmin;
+  font-family: "Anton", sans-serif;
+}
+
+@media (max-width: 1024px) {
+  .biggerText1 {
+    font-size: 15vmin;
+  }
+
+  .biggerText2 {
+    font-family: "Pacifico", cursive;
+    font-size: 3vmin;
+  }
+}
+.biggerText2 {
+  font-size: 5vmin;
+}
+.textP {
+  width: 80%;
+  position: absolute;
+  color: whitesmoke;
+  top: 20%;
+  margin-left: -40%;
+  left: 50%;
+}

@@ -1,0 +1,53 @@
+<section class="cinema-container">
+  <div class="cinema cinema--full">
+    <p class="cinema__title">{{ theatre.theatreName }}</p>
+    <div class="cinema__gallery">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <!--First Slide-->
+          <div class="swiper-slide">
+            <img
+              alt=""
+              width="600"
+              height="200"
+              src="../../assets/Images/{{ theatre.theatreImage }}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cinema__info">
+      <p class="cinema__info-item">
+        <strong>Position:</strong> {{ theatre.position }}
+      </p>
+    </div>
+  </div>
+
+  <div class="share share--centered">
+    <div class="addthis_toolbox addthis_default_style">
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+      <a class="addthis_button_tweet"></a>
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    </div>
+  </div>
+  <div class="movie">
+    <h2 class="page-heading">Description</h2>
+
+    <p class="movie__describe">{{ theatre.description }}</p>
+    <h2 class="page-heading">Map</h2>
+    <div class="container">
+      <agm-map [latitude]="theatre.latitude" [longitude]="theatre.longitude">
+        <agm-marker
+          [latitude]="theatre.latitude"
+          [longitude]="theatre.longitude"
+        ></agm-marker>
+      </agm-map>
+    </div>
+  </div>
+
+  <!-- Tab panes -->
+
+  <br />
+  <br />
+  <br />
+</section>
